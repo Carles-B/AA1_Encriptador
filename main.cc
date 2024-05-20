@@ -18,7 +18,7 @@ int main() {
 	
 	if (outFile.is_open()) {
 		if (inFile.peek() == ifstream::traits_type::eof()) {
-			put_text_in_file(outFile, checksum);
+			put_text_in_new_file(outFile, checksum);
 		}
 		else {
 			cout << "Mensajes guardados detectados, deseas recuperarlos?" << endl;
@@ -26,11 +26,15 @@ int main() {
 			cin >> line;
 			if (line == "Si") {
 				read_and_decrypt_file(inFile, checksum);
-				put_text_in_file(outFile, checksum);
+				put_text_in_new_file(outFile, checksum);
+				//int add = put_text_in_file(outFile, checksum);
+				
+				// En situacion ideal se habría hecho lo siguiente, pero no ha acabado de salir bien
+				// copy_file(fileName, fileName, add);
+				
 			}
 			else {
-				ofstream auxFile(fileName, ios::out);
-				put_text_in_file(outFile, checksum);
+				put_text_in_new_file(outFile, checksum);
 			}
 		}
     } else {
